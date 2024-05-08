@@ -3,7 +3,7 @@ function App() {
 
   return (
     <>
-      <h1>Project setup ready</h1>
+      <h1>Project setup ready from another pc</h1>
     </>
   );
 }
