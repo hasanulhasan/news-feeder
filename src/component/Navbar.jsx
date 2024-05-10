@@ -1,4 +1,14 @@
-export default function Navbar() {
+const categories = [
+  "general",
+  "business",
+  "entertainment",
+  "health",
+  "science",
+  "sports",
+  "technology",
+];
+
+export default function Navbar({onCategory}) {
   return (
     <nav className="border-b border-black py-6 md:py-8">
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-6">
@@ -73,27 +83,11 @@ export default function Navbar() {
       {/* <!-- categories --> */}
       <div className="container mx-auto mt-6">
         <ul className="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold lg:text-base">
-          <li>
-            <a href="#">General</a>
-          </li>
-          <li>
-            <a href="#">Business</a>
-          </li>
-          <li>
-            <a href="#">Entertainment</a>
-          </li>
-          <li>
-            <a href="#">Health</a>
-          </li>
-          <li>
-            <a href="#">Science</a>
-          </li>
-          <li>
-            <a href="#">Sports</a>
-          </li>
-          <li>
-            <a href="#">Technology</a>
-          </li>
+          {
+            categories.map((category,i) => <li key={i}>
+              <button onClick={()=> onCategory(category)} className="capitalize">{category}</button>
+            </li>)
+          }
         </ul>
       </div>
     </nav>
