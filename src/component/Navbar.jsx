@@ -1,3 +1,5 @@
+import { dateFormate } from "../utils/dateFormate";
+
 const categories = [
   "general",
   "business",
@@ -8,11 +10,12 @@ const categories = [
   "technology",
 ];
 
-export default function Navbar({onCategory}) {
+export default function Navbar({ onCategory, onSearch }) {
+  const date = dateFormate(new Date())
+
   return (
     <nav className="border-b border-black py-6 md:py-8">
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-6">
-        {/* <!-- date --> */}
         <div className="flex items-center space-x-4">
           <svg
             width="16"
@@ -64,9 +67,9 @@ export default function Navbar({onCategory}) {
               strokeLinejoin="round"
             />
           </svg>
-          <span>Thursday, February 25, 2021</span>
+          <span>{date}</span>
         </div>
-        {/* <!-- Logo --> */}
+
         <a href="/">
           <img
             className="max-w-[100px] md:max-w-[165px]"
@@ -74,20 +77,30 @@ export default function Navbar({onCategory}) {
             alt="Lws"
           />
         </a>
-        {/* <!-- Logo Ends --> */}
-        {/* <!-- --> */}
+
         <div className="flex items-center space-x-3 lg:space-x-8">
+          <input
+            onChange={onSearch}
+            placeholder="Search news"
+            type="text"
+            className="px-3 py-1"
+          />
           <img src="./assets/icons/search.svg" />
         </div>
       </div>
-      {/* <!-- categories --> */}
+
       <div className="container mx-auto mt-6">
         <ul className="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold lg:text-base">
-          {
-            categories.map((category,i) => <li key={i}>
-              <button onClick={()=> onCategory(category)} className="capitalize">{category}</button>
-            </li>)
-          }
+          {categories.map((category, i) => (
+            <li key={i}>
+              <button
+                onClick={() => onCategory(category)}
+                className="capitalize"
+              >
+                {category}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>

@@ -1,6 +1,7 @@
+
 export default function SingleNews({article}) {
   const {title, description, publishedAt} = article
-  
+
   return (
     <div className="col-span-12 md:col-span-6 lg:col-span-4">
       <div className="col-span-12 md:col-span-4">

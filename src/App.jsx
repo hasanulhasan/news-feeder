@@ -4,21 +4,37 @@ import LeftSideBar from "./component/LeftSideBar";
 import Navbar from "./component/Navbar";
 import RightSideBar from "./component/RightSideBar";
 import useNewsQuery from "./hooks/useNewsQuery";
+import useDebounce from "./hooks/useDebounce";
 
 function App() {
   const [category, setCategory] = useState("general");
-  const {loading, error, data} = useNewsQuery(category);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { loading, error, data } = useNewsQuery(category, searchTerm);
+  console.log(data);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    doSearch(e.target.value);
+  };
+
+  const doSearch = useDebounce((term) => {
+    setSearchTerm(term);
+  }, 1000);
 
   return (
     <>
-      <Navbar onCategory={setCategory}/>
+      <Navbar onCategory={setCategory} onSearch={handleSearch} />
       <main className="my-10 lg:my-14">
         <div className="container mx-auto grid grid-cols-12 gap-8">
-          <LeftSideBar articles={data?.articles}/>
-          <RightSideBar/>
+          {searchTerm ? (
+            <LeftSideBar articles={data?.result} />
+          ) : (
+            <LeftSideBar articles={data?.articles} />
+          )}
+          <RightSideBar />
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
