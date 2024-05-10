@@ -7,10 +7,9 @@ import useNewsQuery from "./hooks/useNewsQuery";
 import useDebounce from "./hooks/useDebounce";
 
 function App() {
-  const [category, setCategory] = useState("general");
+  const [category, setCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState("");
   const { loading, error, data } = useNewsQuery(category, searchTerm);
-  console.log(data);
 
   const handleSearch = (e) => {
     e.preventDefault();
